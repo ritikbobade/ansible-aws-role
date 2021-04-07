@@ -1,0 +1,10 @@
+---
+# vars file for aws
+key: "newrb"
+security_grp_id: "sg-0f04d79cde98daed4"
+subnet_id: "subnet-2b1b1d43"
+access_key: "AKIA6FQUVHFRIRJDTA6R"
+secret_key: "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"
+image_id: "ami-08e0ca9924195beba"
+region_name: "ap-south-1"
+instanceType: "t2.small"

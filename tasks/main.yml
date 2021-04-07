@@ -1,0 +1,34 @@
+---
+# tasks file for aws
+- name: launching AWS instance for configuring K8s master node
+  amazon.aws.ec2:
+      key_name: "{{ key }}"
+      instance_type: "{{ instanceType }}"
+      image: "{{ image_id }}"
+      instance_tags: 
+          Country: IN
+          Name: K8s_Master_1
+          Env: development
+          Author: Ritik Bobade
+      region: "{{ region_name }}"
+      group_id: "{{ security_grp_id }}"
+      vpc_subnet_id: "{{ subnet_id }}"
+      wait: yes
+      count: 1
+      assign_public_ip: yes
+      aws_access_key: "{{ access_key }}"
+      aws_secret_key: "{{ secret_key }}"
+
+- name: Changing to root user
+  command: sudo su
+
+- name: Installing docker insie the instance
+  copy : 
+      src : "docker.yml"
+      dest : "/root"  
+
+- name: Changing directory
+  command: cd /root
+
+- name : Running Docker Playbook
+  command: ansible-playtbook -vv docker.yml        
